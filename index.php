@@ -28,8 +28,10 @@ class info{
         $data = curl_exec($ch);
         $size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
 
-        //curl_close($ch);
-        return $data;
+        curl_close($ch);
+        return 'Size : '.$size . '<br>DataHeaders : ' . $data;
+
+
 
     }
 
