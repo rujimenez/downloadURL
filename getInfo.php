@@ -50,10 +50,10 @@ class getFiles{
             $totaltimeRequest=$totaltimeRequest + $timeRequest;
 
        }
-        if($totalSize<>0) {
+        if(($totalSize<>0) or ($totaltimeRequest<>0)) {
             echo '<h1>============================================================================</h1>';
-            echo '<h1> SIZE of the all '.$this->type.':' . $totalSize . '</h1>';
-            echo '<h1>TotalTimeRequest of all '.$this->type.':' . $totaltimeRequest . '</h1>';
+            echo '<h1> SIZE of the all '.$this->type.':' . number_format($totalSize, 2, '.', '') . '</h1>';
+            echo '<h1>TotalTimeRequest of all '.$this->type.':' . number_format($totaltimeRequest, 2, '.', '') . '</h1>';
             echo '<h1>============================================================================</h1>';
         }
 
@@ -61,11 +61,15 @@ class getFiles{
 
     public function getSize($url){
 
+        try {
+            $img = get_headers('http://' . $url, 1);
+            if (array_key_exists('Content-Length', $img)) {
+                $size = @$img["Content-Length"];
+            } else {
+                $size = 'hiden element Content-Length;';
+            }
 
-        $img = get_headers('http://'.$url, 1);
-        if (array_key_exists('Content-Length',$img)) {
-            $size = $img["Content-Length"];
-        }else{$size='hiden element Content-Length;';}
+        }  catch (Exception $e) {echo 'hiden element Content-Length;' ,  $e->getMessage(), "\n";}
         return $size ;
 
     }
@@ -73,7 +77,12 @@ class getFiles{
     public function getTimeRequest($file){
 
         $t = microtime( TRUE );
-        $fileContent=file_get_contents( 'http://'.$file);
+        try {
+            $fileContent=@file_get_contents( 'http://'.$file);
+        } catch (Exception $e) {
+            echo 'File not found: ',  $e->getMessage(), "\n";
+        }
+
 
         $t = microtime( TRUE ) - $t;
 

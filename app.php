@@ -36,7 +36,9 @@ class APP
                 $dom = getDom\getDomInfo::getDomData($_GET['url']);
                 $size = getDom\getDomInfo::getSize();
                 $info = new getInfo\getFiles($dom);
-                echo '<h2>Size of document: ' . $size . "</h2>";
+                if($size>=1) {
+                    echo '<h2>Size of document: ' . $size . "</h2>";
+                }
                 $urlBase = $info->parseURLBase($_GET['url']);
                 $info->getElements('link', 'href', 'CSS/ICO', $urlBase);
                 $info->getElements('script', 'src', 'JS', $urlBase);
