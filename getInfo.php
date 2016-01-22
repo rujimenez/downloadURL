@@ -46,7 +46,7 @@ class getFiles{
             $size=$this->getSize($url);
             $timeRequest=$this->getTimeRequest($url);
             echo 'URL:'.$url .' ,Size:'. $size .' ,TimeRequest: '. $timeRequest . '</br>';
-            $totalSize.=$totalSize +$size;
+            $totalSize=$totalSize +$size;
             $totaltimeRequest=$totaltimeRequest + $timeRequest;
 
        }
