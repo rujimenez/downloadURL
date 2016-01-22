@@ -10,5 +10,5 @@ parameters:
 
 - to execute just open /downloadURL/index?url=xxxxxxxx,type=x
 
-- example: http://localhost/downloadURL/index.php?url=http://evaarroyo.360webstudio.com/&type=1
-	   http://localhost/downloadURL/index.php?url=http://evaarroyo.360webstudio.com/&type=2
+- example: /downloadURL/index.php?url=http://evaarroyo.360webstudio.com/&type=1
+	   /downloadURL/index.php?url=http://evaarroyo.360webstudio.com/&type=2
